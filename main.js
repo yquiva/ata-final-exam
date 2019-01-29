@@ -66,5 +66,8 @@ function plusOne(quantity) {
 function minusOne(quantity) {
     console.log(quantity);
     var value = document.getElementById(quantity);
-    value.innerHTML = parseInt(value.innerHTML) - 1;    
+    //If to make sure we do not reach negative numbers
+    if (parseInt(value.innerHTML) > 0) {
+        value.innerHTML = parseInt(value.innerHTML) - 1;
+    }    
 };
