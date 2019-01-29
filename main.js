@@ -20,6 +20,7 @@ function loadDataGrid() {
 
         var price = document.createElement("div");
         price.classList.add("col-sm");
+        price.id = "price"+i;
         price.innerHTML =  products[i].price;
         
         var quantity = document.createElement("div");
@@ -27,11 +28,18 @@ function loadDataGrid() {
         quantity.innerHTML = 0;
         quantity.id = "quantity"+i;
 
+        var sumPerProduct = document.createElement("div");
+        sumPerProduct.classList.add("col-sm");
+        sumPerProduct.id = "sumPerProduct"+i;
+        sumPerProduct.innerHTML = "$";
+        sumPerProduct.innerHTML += parseInt(quantity.innerHTML)*parseInt(price.innerHTML);
+
         var btnPlus = document.createElement("button");
         var btnText = document.createTextNode("+");
         btnPlus.appendChild(btnText);
         btnPlus.addEventListener("click", function() { 
             plusOne("quantity"+i);
+            refreshSumPerProduct("sumPerProduct"+i, "quantity"+i, "price"+i );
         });
 
         var btnMinus = document.createElement("button");
@@ -39,15 +47,17 @@ function loadDataGrid() {
         btnMinus.appendChild(btnText);
         btnMinus.addEventListener("click", function() { 
             minusOne("quantity"+i);
+            refreshSumPerProduct("sumPerProduct"+i, "quantity"+i, "price"+i);
         });
-
-        
 
         dataList.append(listItem);
 
+
+
         listItem.append(name);
         listItem.append('$', price, btnPlus, btnMinus);
-        listItem.append(quantity)
+        listItem.append(quantity);
+        listItem.append(sumPerProduct);
            
     });
 
@@ -71,3 +81,11 @@ function minusOne(quantity) {
         value.innerHTML = parseInt(value.innerHTML) - 1;
     }    
 };
+
+function refreshSumPerProduct(sumPerProduct, quantity, price){
+    var value2 = document.getElementById(sumPerProduct);
+    var value3 = document.getElementById(quantity);
+    var value4 = document.getElementById(price);
+    value2.innerHTML = "$";
+    value2.innerHTML += parseInt(value3.innerHTML)*parseInt(value4.innerHTML);
+}
