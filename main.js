@@ -45,8 +45,8 @@ function loadDataGrid() {
         btnPlus.addEventListener("click", function() { 
             plusOne("quantity"+i);
             refreshSumPerProduct("sumPerProduct"+i, "quantity"+i, "price"+i );
-            sumPriceAllProducts("price"+i);
-            sumQuantityAllProducts("quantity"+i);
+            //sumPriceAllProducts("price"+i);
+            //sumQuantityAllProducts("quantity"+i);
         });
 
         var btnMinus = document.createElement("button");
@@ -55,8 +55,8 @@ function loadDataGrid() {
         btnMinus.addEventListener("click", function() { 
             minusOne("quantity"+i);
             refreshSumPerProduct("sumPerProduct"+i, "quantity"+i, "price"+i);
-            sumPriceAllProducts("price"+i);
-            sumQuantityAllProducts("quantity"+i);   
+            //sumPriceAllProducts("price"+i);
+            //sumQuantityAllProducts("quantity"+i);   
         });
 
         dataList.append(listItem);
@@ -100,25 +100,25 @@ function refreshSumPerProduct(sumPerProduct, quantity, price){
     value2.innerHTML += (parseFloat(value3.innerHTML)*parseFloat(value4.innerHTML)).toFixed(2);
 }
 
-function sumPriceAllProducts(price){
-    let amountPrices = document.getElementById("sumPriceAllProducts");
-    var value5 = document.getElementById(price);
-    sumPrices = 0;
-    products.forEach(function (element,i) {
-        sumPrices = (parseFloat(sumPrices) + parseFloat(element[i].price(value))).toFixed(2);
-    });
-    amountPrices.innerHTML = "Final Price: $";
-    amountPrices.innerHTML += parseFloat(sumPrices).toFixed(2);
+ function sumPriceAllProducts(price){
+//     let amountPrices = document.getElementById("sumPriceAllProducts");
+//     var value6 = document.getElementById(price);
+//     sumPrices = 0;
+//     products.forEach(function (element,i) {
+//         sumPrices = (parseFloat(sumPrices) + parseFloat(element.price)).toFixed(2);
+//     });
+//     amountPrices.innerHTML = "Final Price: $";
+//     amountPrices.innerHTML += parseFloat(sumPrices).toFixed(2);
 
-}
+ }
 
-function sumQuantityAllProducts(quantity){
-    let amountProducts = document.getElementById("sumQuantityAllProducts");
-    var value6 = document.getElementById(quantity);
-    sumQuantity = 0;
-    products.forEach(function (element,i) {
-        sumQuantity = parseInt(sumQuantity) + parseInt(element[i].quantity(value));
-    });
-    amountProducts.innerHTML = "Total Amount of Products: ";
-    amountProducts.innerHTML += parseInt(sumQuantity);
-}
+ function sumQuantityAllProducts(quantity){
+//     let amountProducts = document.getElementById("sumQuantityAllProducts");
+//     var value6 = document.getElementById(quantity);
+//     sumQuantity = 0;
+//     products.forEach(function (element,i) {
+//         sumQuantity = parseInt(sumQuantity) + parseInt(element.quantity);
+//     });
+//     amountProducts.innerHTML = "Total Amount of Products: ";
+//     amountProducts.innerHTML += parseInt(sumQuantity);
+ }
