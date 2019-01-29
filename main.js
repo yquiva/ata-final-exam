@@ -8,7 +8,12 @@ var purchase = [];
 function loadDataGrid() {
     
     let dataList = document.getElementById("dataList");
-    
+    let amountProducts = document.getElementById("sumQuantityAllProducts");
+    let amountPrices = document.getElementById("sumPriceAllProducts");
+
+    amountProducts.append("Total Amount of Products: 0");
+    amountPrices.append("Final Price: $0.00");
+
     products.forEach(function (element,i) {
         
         var listItem = document.createElement("section");
@@ -40,6 +45,8 @@ function loadDataGrid() {
         btnPlus.addEventListener("click", function() { 
             plusOne("quantity"+i);
             refreshSumPerProduct("sumPerProduct"+i, "quantity"+i, "price"+i );
+            sumPriceAllProducts("price"+i);
+            sumQuantityAllProducts("quantity"+i);
         });
 
         var btnMinus = document.createElement("button");
@@ -48,17 +55,17 @@ function loadDataGrid() {
         btnMinus.addEventListener("click", function() { 
             minusOne("quantity"+i);
             refreshSumPerProduct("sumPerProduct"+i, "quantity"+i, "price"+i);
+            sumPriceAllProducts("price"+i);
+            sumQuantityAllProducts("quantity"+i);   
         });
 
         dataList.append(listItem);
-
-
 
         listItem.append(name);
         listItem.append('$', price, btnPlus, btnMinus);
         listItem.append(quantity);
         listItem.append(sumPerProduct);
-           
+       
     });
 
 
@@ -67,12 +74,14 @@ function loadDataGrid() {
 var clicks = 0;
 //var i = 0;
 
+//Function to add one on quantity column when + button is click
 function plusOne(quantity) {
     console.log(quantity);
     var value = document.getElementById(quantity);
     value.innerHTML = parseInt(value.innerHTML) + 1;
 };
 
+//Function to rest one on quantity column when - button is click
 function minusOne(quantity) {
     console.log(quantity);
     var value = document.getElementById(quantity);
@@ -82,10 +91,34 @@ function minusOne(quantity) {
     }    
 };
 
+//Function to refresh column Sum per product when + or - buttons are click
 function refreshSumPerProduct(sumPerProduct, quantity, price){
     var value2 = document.getElementById(sumPerProduct);
     var value3 = document.getElementById(quantity);
     var value4 = document.getElementById(price);
     value2.innerHTML = "$";
-    value2.innerHTML += parseInt(value3.innerHTML)*parseInt(value4.innerHTML);
+    value2.innerHTML += (parseFloat(value3.innerHTML)*parseFloat(value4.innerHTML)).toFixed(2);
+}
+
+function sumPriceAllProducts(price){
+    let amountPrices = document.getElementById("sumPriceAllProducts");
+    var value5 = document.getElementById(price);
+    sumPrices = 0;
+    products.forEach(function (element,i) {
+        sumPrices = (parseFloat(sumPrices) + parseFloat(element[i].price(value))).toFixed(2);
+    });
+    amountPrices.innerHTML = "Final Price: $";
+    amountPrices.innerHTML += parseFloat(sumPrices).toFixed(2);
+
+}
+
+function sumQuantityAllProducts(quantity){
+    let amountProducts = document.getElementById("sumQuantityAllProducts");
+    var value6 = document.getElementById(quantity);
+    sumQuantity = 0;
+    products.forEach(function (element,i) {
+        sumQuantity = parseInt(sumQuantity) + parseInt(element[i].quantity(value));
+    });
+    amountProducts.innerHTML = "Total Amount of Products: ";
+    amountProducts.innerHTML += parseInt(sumQuantity);
 }
